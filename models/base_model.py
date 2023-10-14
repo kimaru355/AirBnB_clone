@@ -2,7 +2,7 @@
 
 import uuid
 from datetime import datetime
-from models/__init__ import storage
+from models.__init__ import storage
 
 # the base model
 date_format = "%Y-%m-%dT%H:%M:%S.%f"
@@ -24,11 +24,11 @@ class BaseModel():
             self.updated_at = datetime.now()
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
-            storage.new()
+            #storage.new()
 
     def save(self):
         self.updated_at = datetime.now()
-        storage.save()
+        #storage.save()
 
 
     def __str__(self):
