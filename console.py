@@ -5,7 +5,7 @@ import cmd
 # Command line interpreter
 
 
-class MyConsole(cmd.Cmd):
+class HBNBCommand(cmd.Cmd):
     prompt = '(hbnb) '
 
     def emptyline(self):
@@ -13,13 +13,13 @@ class MyConsole(cmd.Cmd):
         pass
 
     def do_quit(self, arg):
-        'Exit the terminal'
+        'Quit command to exit the program'
         return True
 
     def do_EOF(self, arg):
-        'End of file'
+        'EOF to exit the program'
         return True
 
 
 if __name__ == '__main__':
-    MyConsole().cmdloop()
+    HBNBCommand().cmdloop()

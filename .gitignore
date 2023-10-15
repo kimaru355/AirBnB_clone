@@ -1,0 +1,7 @@
+# ignore files and directories
+
+# ignore file created during testing
+my_file.json
+
+# ignore all __pycache__ directories
+**/__pycache__/
