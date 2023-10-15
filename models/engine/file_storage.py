@@ -12,16 +12,18 @@ class FileStorage():
         return self.__objects
 
     def new(self, obj):
-        for key, value in obj.items():
-            setattr(self, self.__objects[key], value)
+        key = f"{obj['__class__']}.{obj['id']}"
+        print(self.__objects)
+        self.__objects[key] = obj
+        print(self.__objects)
 
     def save(self):
         with open(self.__file_path, 'a') as file:
-            json.dump(self.__object, file)
+            json.dump(self.__objects, file)
 
     def reload(self):
         try:
             with open(self.__file_path, 'r') as file:
-                setattr(self, self.__objects, json.loads(file.read()))
+                self.__objects = json.loads(file.read())
         except FileNotFoundError:
             pass
