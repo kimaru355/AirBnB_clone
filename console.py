@@ -2,6 +2,7 @@
 
 import cmd
 from models.base_model import BaseModel
+from models.base_model import storage
 
 # Command line interpreter
 
@@ -23,6 +24,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_create(self, *args):
         'Creates a new instance of a class'
+        args = args[0].split(' ')
         if len(args) > 1:
             print("** pass one class name **")
         else:
@@ -36,8 +38,30 @@ class HBNBCommand(cmd.Cmd):
             except NameError:
                 print("** class name doesn't exist **")
 
-    def show(self, *args):
-        pass
+    def do_show(self, *args):
+        'Prints the string representation of an instance'
+        args = args[0].split(' ')
+        if len(args) == 1 and args[0] == '':
+            print("** class name missing **")
+        elif len(args) == 1:
+            print(args)
+            print(len(args))
+            print("** instance id missing **")
+        elif len(args) > 2:
+            print("** pass class name and id **")
+        else:
+            try:
+                eval(args[0])()
+            except NameError:
+                print("** class name doesn't exist **")
+                return None
+            all_objs = storage.all()
+            for obj_id in all_objs:
+                obj = all_objs[obj_id]
+                if obj['id'] == args[1]:
+                    my_model = eval(args[0])(obj)
+                    print(my_model.__str__())
+                    break
 
 
 if __name__ == '__main__':
