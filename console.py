@@ -155,7 +155,7 @@ class HBNBCommand(cmd.Cmd):
                             my_model = eval(args[0])(obj)
                             attr = args[2]
                             my_model.attr = args[3]
-                            my_model.save()
+                            #my_model.save()
                             print(my_model)
 
 
