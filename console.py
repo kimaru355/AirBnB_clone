@@ -4,6 +4,7 @@ from copy import deepcopy
 import cmd
 from models.base_model import BaseModel
 from models.base_model import storage
+from models.__init__ import all_classes
 
 # Command line interpreter
 
@@ -49,14 +50,17 @@ class HBNBCommand(cmd.Cmd):
         elif len(args) > 2:
             print("** pass class name and id **")
         else:
-            try:
-                eval(args[0])()
-            except NameError:
+            if args[0] not in all_classes:
                 print("** class name doesn't exist **")
                 return None
             all_objs = storage.all()
-            for obj_id in all_objs:
-                obj = all_objs[obj_id]
+            if not all_objs:
+                print("** no instance found **")
+                return None
+            # copy to avoid error during iteration
+            all_objs_copy = deepcopy(all_objs)
+            for obj_id in all_objs_copy:
+                obj = all_objs_copy[obj_id]
                 if obj['id'] == args[1]:
                     my_model = eval(args[0])(obj)
                     print(my_model.__str__())
@@ -92,30 +96,34 @@ class HBNBCommand(cmd.Cmd):
             print("** pass class name or nothing **")
         else:
             if args[0] != '':
-                try:
-                    eval(args[0])()
-                except NameError:
+                if args[0] not in all_classes:
                     print("** class doesn't exist **")
                     return None
             my_all = []
+            # reload to remove new instances not in the file
+            storage.reload()
             all_objs = storage.all()
-            print(all_objs)
-            temp_objs = deepcopy(all_objs)
-            print(temp_objs)
-            if args[0] == '':
-                for obj_id in temp_objs.items:
-                    obj = temp_objs[obj_id]
-                    my_model = BaseModel(obj)
-                    my_all.append(my_model.__str__())
-                print(my_all)
-            else:
-                for obj_id in temp_objs:
-                    my_name = obj_id.split('.')
-                    if my_name[0] == args[0]:
-                        obj = temp_objs[obj_id]
+            if not all_objs:
+                print("** no instances exist **")
+                return None
+            all_objs_copy = deepcopy(all_objs)
+            if args[0] != '':
+                for obj_id in all_objs_copy:
+                    obj = all_objs_copy[obj_id]
+                    if obj['__class__'] == args[0]:
                         my_model = eval(args[0])(obj)
                         my_all.append(my_model.__str__())
-                print(my_all)
+                if my_all:
+                    print(my_all)
+                else:
+                    print("** no instances exist **")
+            else:
+                for obj_id in all_objs_copy:
+                        obj = all_objs[obj_id]
+                        my_model = eval(obj['__class__'])(obj)
+                        my_all.append(my_model.__str__())
+                if my_all:
+                    print(my_all)
 
     def update(self, *args):
         'Updates an instance based on class name and id'
