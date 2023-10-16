@@ -95,13 +95,15 @@ class HBNBCommand(cmd.Cmd):
                 try:
                     eval(args[0])()
                 except NameError:
-                    print("** class name doesn't exist **")
+                    print("** class doesn't exist **")
                     return None
             my_all = []
             all_objs = storage.all()
+            print(all_objs)
             temp_objs = deepcopy(all_objs)
+            print(temp_objs)
             if args[0] == '':
-                for obj_id in temp_objs:
+                for obj_id in temp_objs.items:
                     obj = temp_objs[obj_id]
                     my_model = BaseModel(obj)
                     my_all.append(my_model.__str__())
