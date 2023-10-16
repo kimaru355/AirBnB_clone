@@ -125,7 +125,7 @@ class HBNBCommand(cmd.Cmd):
                 if my_all:
                     print(my_all)
 
-    def update(self, *args):
+    def do_update(self, *args):
         'Updates an instance based on class name and id'
         args = args[0].split(' ')
         if args[0] == '':
@@ -139,12 +139,24 @@ class HBNBCommand(cmd.Cmd):
         elif len(args) > 4:
             print("** pass class id attribute and value **")
         else:
-            try:
-                eval(args[0])()
-            except NameError:
+            if args[0] not in all_classes:
                 print("** class doesn't exist **")
                 return None
             all_objs = storage.all()
+            if not all_objs:
+                print("** no instance found **")
+                return None
+            all_objs_copy = deepcopy(all_objs)
+            for obj_id in all_objs_copy:
+                obj = all_objs_copy[obj_id]
+                if obj['__class__'] == args[0]:
+                    if obj['id'] == args[1]:
+                        if args[2] != 'id' and args[2] != 'updated_at' and args[2] != 'created_at':
+                            my_model = eval(args[0])(obj)
+                            attr = args[2]
+                            my_model.attr = args[3]
+                            my_model.save()
+                            print(my_model)
 
 
 if __name__ == '__main__':
