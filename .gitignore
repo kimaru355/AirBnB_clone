@@ -5,3 +5,6 @@ my_file.json
 
 # ignore all __pycache__ directories
 **/__pycache__/
+
+# ginore all .swp restore files
+*.swp
