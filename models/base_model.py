@@ -10,7 +10,10 @@ date_format = "%Y-%m-%dT%H:%M:%S.%f"
 
 class BaseModel():
     def __init__(self, *args, **kwargs):
+        if args:
+            print('args: ', args)
         if kwargs:
+            print('kwargs: ', kwargs)
             for key, value in kwargs.items():
                 if key == "__class__":
                     continue
@@ -21,6 +24,7 @@ class BaseModel():
                 else:
                     setattr(self, key, value)
         else:
+            print('no kwargs')
             self.created_at = datetime.now()
             self.id = str(uuid.uuid4())
             self.updated_at = datetime.now()

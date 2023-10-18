@@ -152,11 +152,20 @@ class HBNBCommand(cmd.Cmd):
                 if obj['__class__'] == args[0]:
                     if obj['id'] == args[1]:
                         if args[2] != 'id' and args[2] != 'updated_at' and args[2] != 'created_at':
+                            print('before class instance: ', all_objs_copy)
+                            print('odj before class instance: ', obj)
                             my_model = eval(args[0])(obj)
-                            attr = args[2]
-                            my_model.attr = args[3]
-                            #my_model.save()
+                            print('model after class instance: ', my_model)
+                            print('after class instance: ', all_objs_copy)
+                            setattr(my_model, args[2], args[3])
+                            print('model after setattr class instance: ', my_model)
+                            print('after setattr class instance: ', all_objs_copy)
+                            my_model.save()
+                            print('model after save class instance: ', my_model)
+                            print('after save class instance: ', all_objs_copy)
                             print(my_model)
+                        else:
+                            print(f"{args[2]} not updated")
 
 
 if __name__ == '__main__':
