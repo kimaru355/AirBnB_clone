@@ -26,7 +26,7 @@
 }
 .filters h2 {
 	font-size: 16px;
-	margin-top: 30px;
+	margin: 30px 20px 0;
 }
 .popover {
 	display: none;
@@ -36,10 +36,14 @@
 	border-radius: 4px;
 	position: absolute;
 	top: 70px;
-	padding-left: 20px;
+	background-color: blue;
+	padding-bottom: 30px;
 }
-.popover ul:last-child {
-	margin-bottom: 30px;
+.popover p {
+	margin-left: 40px;
+}
+.amenities ul {
+	padding-top: 30px;
 }
 .filters div:hover .popover {
 	display: block;
