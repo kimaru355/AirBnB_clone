@@ -13,14 +13,39 @@
 .locations, .amenities {
 	height: 100%;
 	width: 25%;
+	background-color: red;
+	position: relative;
 }
 .filters h3 {
 	font-weight: 600;
-	margin: 5px 30px 0;
+	margin: 15px 40px 0;
 }
 .filters h4 {
 	font-weight: 400;
-	margin: 0 30px;
+	margin: 0 40px;
+}
+.filters h2 {
+	font-size: 16px;
+	margin-top: 30px;
+}
+.popover {
+	display: none;
+	color: #FAFAFA;
+	width: 100%;
+	border: 1px solid #DDDDDD;
+	border-radius: 4px;
+	position: absolute;
+	top: 70px;
+	padding-left: 20px;
+}
+.popover ul:last-child {
+	margin-bottom: 30px;
+}
+.filters div:hover .popover {
+	display: block;
+}
+.no-list {
+	list-style-type: none;
 }
 .filters button {
 	font-size: 18px;
