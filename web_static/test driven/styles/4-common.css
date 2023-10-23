@@ -12,3 +12,7 @@
   flex-wrap: wrap;
   justify-content: center;
 }
+.page-container {
+  min-height: 100vh;
+  position: relative;
+}
