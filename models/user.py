@@ -1,12 +1,12 @@
 #!/usr/bin/python3
-
-from base_model import BaseModel
-from base_model import storage
+"""
+This is User class to represent new users
+"""
+from models.base_model import BaseModel
 
 class User(BaseModel):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.email = ''
-        self.password = ''
-        self.first_name = ''
-        self.last_name = ''
+    """ User subclass that inherits from BaseModel """
+    email = ""
+    password = ""
+    first_name = ""
+    last_name = ""

@@ -1,1 +1,1 @@
-User interface of Airbnb Clone
+AirBnB clone - Web static
